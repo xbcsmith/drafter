@@ -1,0 +1,10 @@
+Players           <br/>
+----------------- <br/>
+
+<table>
+{% for item in items %}
+  <tr><td> {{ item.round }} </td>
+  <td> {{ item.name }} </td>
+  <td> {{ item.team }} </td></tr>
+{% endfor %}
+</table>

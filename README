@@ -1,0 +1,20 @@
+Drafter
+========
+
+An application for drafting players
+
+Instructions
+============
+
+    git clone <repo>
+    mkvirtualenv foo
+    pip install docker-compose
+
+edit players.json
+
+    ./run.sh
+
+Requires
+========
+
+Docker

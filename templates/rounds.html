@@ -1,0 +1,11 @@
+Rounds          <br/>
+----------------- <br/>
+
+{% for item in items %}
+<table>
+ROUND: {{ item.round }}
+{% for player in item.players %}
+  <tr><td> {{ player.name }}</td><td>{{ player.team }}</td></tr>
+{% endfor %}
+</table>
+{% endfor %}

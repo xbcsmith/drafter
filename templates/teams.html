@@ -1,0 +1,31 @@
+Teams List      <br/>
+----------------- <br/>
+<p>
+<h1> Add Team </h1>
+<form action="/addteam" method="POST">
+  Name: <input type="text" name="name"></input>
+  Captain: <input type="text" name="captain"></input>
+  Order: <input type="text" name="order"></input>
+  <input type="submit"></input>
+</form>
+</p>
+<p>
+<h1> Remove Team </h1>
+  <datalist id="teams">
+{% for team in items.teams %}
+    <option value="{{ team.name }}">
+{% endfor %}
+  </datalist>
+<form action="/removeteam" method="POST">
+  Name: <input type="text" name="name" list="teams"></input>
+</form>
+</p>
+
+
+<table>
+{% for item in items %}
+  <tr><td> {{ item.order }} </td>
+  <td> {{ item.name }} </td>
+  <td> {{ item.captain }} </td></tr>
+{% endfor %}
+</table>
