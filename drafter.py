@@ -1,6 +1,7 @@
 import os
-from flask import Flask, redirect, url_for, request, render_template
+from flask import Flask, redirect, url_for, request, render_template, jsonify
 from pymongo import MongoClient
+from bson import json_util
 import datetime
 import json
 
@@ -23,7 +24,7 @@ def draft():
     teams = [ team for team in _teams ]
     _items = db.playersdb.find()
     drafted = [item for item in _items]
-    drafted = sorted(drafted, key=lambda x: x['round'])
+    drafted = sorted(drafted, key=lambda x: int(x['round']))
     drafted.reverse()
     players = sorted(PLAYERS)
     items = dict(drafted=drafted,players=players,teams=teams)
@@ -40,7 +41,6 @@ def rounds():
     for _round, players in rounds.items():
         items.append(dict(round=_round,players=players))
     return render_template('rounds.html', items=items)
-
 
 @app.route('/players')
 def players():
@@ -60,6 +60,16 @@ def teams():
     items = [item for item in _items]
     items = sorted(items, key=lambda x: x['order'])
     return render_template('teams.html', items=items)
+
+@app.route('/dumps')
+def dumps():
+    _teams = db.teamsdb.find()
+    teams = [ team for team in _teams ]
+    _players = db.playersdb.find()
+    players = [ player for player in _players ]
+    data=dict(teams=teams,players=players)
+    results = json.dumps(data, default=json_util.default)
+    return jsonify(results=results)
 
 @app.route('/addteam', methods=['POST'])
 def addteam():

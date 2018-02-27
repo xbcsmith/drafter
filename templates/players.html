@@ -1,6 +1,15 @@
+<table>
+<tr>
+<td><a href={{ url_for("draft") }}>Draft</a></td>
+<td><a href={{ url_for("teams") }}>Teams</a></td>
+<td><a href={{ url_for("players") }}>Players</a></td>
+<td><a href={{ url_for("rounds") }}>Rounds</a></td>
+<td><a href={{ url_for("list") }}>List</a></td>
+</tr>
+</table>
+<hr>    <br/>
 Players           <br/>
 ----------------- <br/>
-
 <table>
 {% for item in items %}
   <tr><td> {{ item.round }} </td>
